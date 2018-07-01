@@ -1,0 +1,83 @@
+/* tag selector */
+header {
+  box-sizing: border-box;
+  background-color:lightcoral;
+  padding:30px;
+  height:100px;
+  margin:10px;
+}
+main {
+  background:lightyellow;
+  height:300px;
+}
+section {
+  background: lightblue;
+  height:500px;
+}
+h1 > span {
+  font-size:14px;
+}
+/* id selector */
+#header-nav {
+  text-align:right
+}
+/* class selector */
+.plain {
+  text-decoration: none;
+}
+
+/* child selector */
+#header-nav > ul {
+  list-style: none;
+  display: -ms-flex;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-end;
+  padding:0;
+}
+/* 자손 selector */
+#header-nav li {
+  /* display: inline-block; */
+  font-size:24px;
+  /* margin-left:20px; */
+}
+/* 특성 상황에 대한 selector */
+/* next selector */
+h2 + p {
+  color:purple
+} 
+/* 특정번째 element */
+/* #header-nav li:first-child a{
+  color:red
+}
+
+#header-nav li:last-child a {
+  color:black;
+} */
+#header-nav li:nth-child(odd) a {
+  font-size:36px;
+}
+h1:after {
+  content:'';
+  display:block;
+  width:400px;
+  height:1px;
+  background: red;
+}
+/* 사용자 이벤트가 있는 경우 */
+input:focus {
+  background: lightblue;
+}
+button:hover {
+  background:yellow;
+}
+a {
+  color:black
+}
+a:hover {
+  color:navy
+}
+a:active {
+  color:purple
+}
