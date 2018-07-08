@@ -1,0 +1,294 @@
+main {
+	width: 1224px;
+	overflow: hidden;
+	margin: 0 auto;
+}
+#header-top {
+	box-sizing: border-box;
+	background-color: white;
+	height:40px;
+	padding:2px;
+	margin:2px;
+}
+
+#header-top > ul {
+	list-style:none;
+	display: flex;
+	flex-direction:row;
+    justify-content:center;
+	font-size:12px;
+	margin-left:920px;
+	margin-right:5px;
+}
+
+.menu1 {
+    display: flex;
+	flex-direction:row;
+	justify-content:center;
+	text-decoration: none;
+	color:grey;
+	margin-left:5px;
+	margin-right:5px;
+	border-right:1px solid grey;
+}
+
+#header-menubar {
+	display: flex;
+	flex-direction:row;
+	justify-content:center;
+	box-sizing: border-box;
+	background-color:white;
+	height:60px;
+	padding:2px;
+	margin:2px;
+	margin-right:550px;
+}
+
+#header-menubar > ul {
+	list-style: none;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.menutitle {
+	font-size:20px;
+	font-weight: bold;
+	margin-left: 20px;
+	text-decoration: none;
+	color:black;
+}
+.menu2 {
+	font-size:15px;
+	font-weight: bold;
+	margin-left: 30px;
+	text-decoration: none;
+	color:black;
+}
+
+#banner {
+	box-sizing: border-box;
+	background-color:lightblue;
+	height:200px;
+}
+
+#noticelist {
+	float: left;
+	box-sizing: border-box;
+	display: block;
+	background-color:white;
+	height:200px;
+	width: 720px;
+}
+
+.notice > a {
+	float:right;
+	text-decoration: none;
+	color: grey;
+	font-size: 13px;
+}
+
+.list {
+	font-size:15px;
+	color:black;
+	list-style: none;
+
+}
+
+.list > li {
+	padding: 10px;
+	border-bottom:1px solid grey;
+}
+
+
+.noticepost {
+	text-decoration: none;
+	color:black;
+}
+
+.date {
+	float:right;
+	text-decoration: none;
+	color: gray;
+	font-size: 13px;
+}
+
+#tip {
+	float:left;
+	box-sizing: border-box;
+	display: block;
+	background-color:white;
+	height:200px;
+	width: 720px;
+}
+
+.bodybanner {
+	font-size:15px;
+	color:black;
+	list-style: none;
+	margin-top: 30px;
+}
+
+.bodybanner > li {
+	display: inline-block;
+	margin-top: 15px;
+	padding: px;
+}
+
+.bannernotice {
+	display: block;
+	margin-right: 500px;
+}
+.banner {
+	text-decoration: none;
+	color:black;
+}
+.specify {
+	float:right;
+	text-decoration: none;
+	color: gray;
+	font-size: 13px;
+}
+
+#event {
+	float:left;
+	box-sizing: border-box;
+	display: block;
+	background-color:white;
+	height:200px;
+	width: 720px;
+}
+
+.event > li {
+	display: inline-block;
+	margin-top: 15px;
+	padding: 10px;
+}
+
+.eventlist {
+	text-decoration: none;
+	color:black;
+}
+
+#login {
+	float:right;
+	box-sizing: border-box;
+	display: block;
+	background-color:white;
+	height:200px;
+	width: 360px;
+}
+
+#login > a {
+	float:right;
+}
+
+#login > p {
+	display: flex;
+	flex-direction:row;
+	background-color: lightgreen;
+	padding:30px;
+    justify-content:center;
+}
+
+
+.user_login {
+    display: flex;
+	flex-direction:row;
+	justify-content:center;
+	text-decoration: none;
+	color:grey;
+	margin-left:5px;
+	margin-right:5px;
+	border-right:1px solid grey;
+}
+
+#manage {
+	float:right;
+	box-sizing: border-box;
+	display: block;
+	background-color:white;
+	height:100px;
+	width: 360px;
+}
+
+.quicknotice {
+	display: block;
+	margin-right: 150px;
+}
+
+.managelist > li {
+	display: inline-block;
+	margin-top: 3px;
+	padding: 3px;
+}
+
+.manage {
+	text-decoration: none;
+	color:black;
+}
+
+#coupon {
+	float:right;
+	box-sizing: border-box;
+	display: block;
+	background-color:white;
+	height:100px;
+	width: 360px;
+
+}
+
+#first {
+	float:right;
+	box-sizing: border-box;
+	display: block;
+	background-color:white;
+	height:200px;
+	width: 360px;
+
+}
+
+.firstnotice {
+	display: block;
+	margin-right: 100px;
+}
+
+.firstlist > li {
+	display: inline-block;
+	margin-top: 5px;
+	padding: 5px;
+}
+
+.subpost {
+	text-decoration: none;
+	color: gray;
+	font-size: 13px;
+}
+
+.firstpost {
+	text-decoration: none;
+	color:black;
+}
+
+#footer {
+    position:absolute;
+    bottom:0;
+    width:100%;
+}
+
+.user_login:hover {
+  color:blue;
+  transition:0.5s all ease;
+}
+
+#header-menubar > ul {
+  animation:0.5s goingDown ease;
+}
+
+@keyframes goingDown {
+	from {
+		margin-top:-100px;
+	}
+	to {
+		margin-top:0;
+	}
+}
