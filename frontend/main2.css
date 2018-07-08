@@ -20,7 +20,8 @@ main {
 }
 main > h1 {
   position: absolute;
-  animation:4s rotate ease infinite;
+  transition:2s all ease;
+  /* animation:4s rotate ease infinite; */
 }
 @keyframes rotate {
   0% {

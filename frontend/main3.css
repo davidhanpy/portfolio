@@ -1,0 +1,24 @@
+#header-nav > ul {
+  margin:0;
+  padding:0;
+  display:flex;
+  justify-content: space-between;
+}
+#header-nav li:nth-child(even) {
+  flex:1;
+  background-color: lightpink;
+}
+#header-nav li:nth-child(odd) {
+  flex:2;
+  background-color:grey;
+}
+
+#grid > img {
+  width:300px;
+  float:right;
+}
+#grid::after {
+  display:block;
+  content:'';
+  clear:both;
+}
