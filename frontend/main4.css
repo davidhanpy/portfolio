@@ -1,0 +1,85 @@
+/* @import './main2.css'; */
+
+body {
+  font-size:12px;
+}
+main {
+  font-size:6px;
+}
+h1 {
+  /* font-size:10em; */
+  /* 부모 폰트사이즈의 10배 */
+  /* font-size:10rem; */
+  /* html 폰트 사이즈의 10배 */
+}
+#grid {
+  width:100%;
+  display:grid;
+  grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
+}
+.grid-frame {
+  position: relative;
+}
+.grid-frame::after {
+  content:'hello';
+  transition:0.4s ease opacity;
+  position: absolute;
+  top:0;left:0;right:0;bottom:0;
+  background-color:rgba(0,0,0,0.6);
+  color:#fff;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+}
+.grid-frame:hover::after {
+  opacity: 1;
+}
+#grid img {
+  width:100%;
+}
+#header-nav ul {
+  display:flex;
+  justify-content: space-between;
+  list-style:none;
+}
+#header-nav li {
+  font-size:18px;
+  padding:0 16px;
+}
+header button {
+  /* 아예 없는 것 처럼 자리차지 X */
+  display: none;
+  /* 보이진 않지만 자리차지는 하는 것 */
+  /* opacity: 0;
+  visibility: hidden; */
+}
+@media(max-width:768px) {
+  body {
+    font-size:14px;
+  }
+  article {
+    width:100%;
+  }
+  #grid {
+    grid-template: 1fr / 1fr;
+  }
+  header {
+    position: fixed;
+    top:0;left:0;right:0;
+    min-height:60px;
+    background-color: antiquewhite;
+  }
+  #header-nav {
+    transition: 0.4s ease height;
+    height:0px;
+    overflow: hidden;
+    /* display:none; */
+  }
+  #header-nav ul {
+    flex-direction: column;
+  }
+  header button {
+    display:block;
+  }
+}
