@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block body %}
+{% for portfolio in pList %}
+<a href="/portfolio/detail/{{portfolio.pk}}">
+  {{ portfolio.artist }}
+  {{ portfolio.title }}
+</a>
+{% endfor %}
+{% endblock %}
