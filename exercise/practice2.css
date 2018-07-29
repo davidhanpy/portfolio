@@ -7,29 +7,27 @@ main {
 	box-sizing: border-box;
 	background-color: white;
 	height:40px;
-	padding:2px;
-	margin:2px;
 }
 
-#header-top > ul {
+#header-top ul {
 	list-style:none;
 	display: flex;
 	flex-direction:row;
     justify-content:center;
-	font-size:12px;
-	margin-left:920px;
-	margin-right:5px;
-}
+	font-size:13px;
+	padding-top:10px;
+	padding-left:900px;
+	/* 위치 패딩으로 주는게 맞나요?  */
+} 
 
-#header-top a {
+#header-top li a {
     display: flex;
 	flex-direction:row;
 	justify-content:center;
 	text-decoration: none;
 	color:grey;
-	margin-left:5px;
-	margin-right:5px;
-	padding-right:5px;
+	padding-left:10px;
+	padding-right:10px;
 	border-right:1px solid grey;
 }
 #header-top li:last-child > a {
@@ -42,28 +40,22 @@ main {
 	box-sizing: border-box;
 	background-color:white;
 	height:60px;
-	padding:2px;
-	margin:2px;
-	margin-right:550px;
+	padding-right:600px;
 }
 
-#header-menubar > ul {
+#header-menubar  ul {
 	list-style: none;
 	display: flex;
-	flex-direction: row;
-	align-items: center;
+	flex-direction:row;
 }
+
 .menutitle {
-	font-size:20px;
-	font-weight: bold;
-	margin-left: 20px;
-	text-decoration: none;
-	color:black;
+	padding-right:25px;
 }
 .menu2 {
 	font-size:15px;
 	font-weight: bold;
-	margin-left: 30px;
+	padding-left: 30px;
 	text-decoration: none;
 	color:black;
 }
@@ -72,22 +64,43 @@ main {
 	box-sizing: border-box;
 	background-color:lightblue;
 	height:200px;
+	/* 배너 끝에 어떻게 공백없게 하나요? */
 }
 
 #noticelist {
 	box-sizing: border-box;
 	display: block;
 	background-color:white;
-	padding:10px 20px;
+	padding-right:25px;
 }
 
 .notice > a {
-	float:right;
+	display:inline-block;
+	/* inline-flex 사용가능? */
 	text-decoration: none;
 	color: grey;
 	font-size: 13px;
+	padding-top:0px;
+	padding-bottom:0px;
+	padding-left:500px;
+	padding-right:0px;
+	margin:0px; */
+	/* 마진,패딩말고 완벽한 우측정렬없나요? */
 }
 
+.date {
+	display:inline-block;
+	/* inline-flex 사용가능? */
+	text-decoration: none;
+	color: grey;
+	font-size: 13px;
+	padding-top:0px;
+	padding-bottom:0px;
+	padding-left:100px;
+	padding-right:0px;
+	margin:0px;
+	/* 마진,패딩말고 완벽한 우측정렬없나요? */
+}
 .list {
 	font-size:15px;
 	color:black;
@@ -96,16 +109,26 @@ main {
 }
 
 .list > li {
-	padding: 10px;
-	border-bottom:1px solid grey;
+	display:flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 15px;
+	border-bottom:1px solid lightgray;
 }
 
+.list li:first-child {
+	border-bottom:0px;
+}
 
 .noticepost {
 	text-decoration: none;
 	color:black;
 }
 
+.list li:last-child {
+	padding-bottom:20px;
+	border-bottom:0px;
+}
 /* .date {
 	float:right;
 	text-decoration: none;
@@ -122,19 +145,44 @@ main {
 	width: 720px;
 } */
 
+#tip {
+	box-sizing: border-box;
+	display: block;
+	background-color:white;
+	padding-right:25px;
+}
 .bodybanner {
 	font-size:15px;
 	color:black;
 	list-style: none;
-	margin-top: 30px;
 }
 
 .bodybanner > li {
-	display: inline-block;
-	margin-top: 15px;
-	padding: px;
+	display:flex;
+	justify-content:space-between;
+	padding: 15px;
+	/*리스트에는 기본적으로 마진과 패딩이 세팅이 되어있는지?*/
 }
-
+.specify {
+	display:inline-block;
+	/* inline-flex 사용가능? */
+	text-decoration: none;
+	color: grey;
+	font-size: 13px;
+	padding-top:0px;
+	padding-bottom:0px;
+	padding-left:100px;
+	padding-right:0px;
+	margin:0px;
+	/* 마진,패딩말고 완벽한 우측정렬없나요? */
+	float:right;
+}
+.bodybanner li:last-child {
+	display: block;
+	padding-top:15px;
+	padding-bottom:15px;
+	font-weight: bold;
+}
 .bannernotice {
 	display: block;
 	margin-right: 500px;
@@ -145,9 +193,9 @@ main {
 }
 .row {
 	margin:0 auto;
-	width:1080px;
+	width:1184px;
 	display:flex;
-	justify-content: space-between
+	justify-content:space-between;
 }
 .row > div:first-child  {
 	width:720px;
@@ -155,9 +203,10 @@ main {
 	border-bottom:1px solid #d0d0d0;
 }
 .row > div:last-child {
-	flex:1
+	flex:1;
+	border-bottom:1px solid #d0d0d0;
 }
-/* .specify {
+.specify {
 	float:right;
 	text-decoration: none;
 	color: gray;
@@ -171,7 +220,7 @@ main {
 	background-color:white;
 	height:200px;
 	width: 720px;
-} */
+}
 
 .event > li {
 	display: inline-block;
@@ -183,38 +232,46 @@ main {
 	text-decoration: none;
 	color:black;
 }
-/* 
+ 
 #login {
-	float:right;
+	/* float:right; */
 	box-sizing: border-box;
 	display: block;
 	background-color:white;
 	height:200px;
 	width: 360px;
-} */
-
-#login > a {
-	float:right;
 }
 
+#login {
+	display:block;
+	padding:10px 30px;
+}
 #login > p {
 	display: flex;
 	flex-direction:row;
 	background-color: lightgreen;
-	padding:30px;
+	margin:;
+	padding:20px 0px;
     justify-content:center;
 }
 
-
+#login a:nth-child(3) {
+	margin-left:200px;
+	/* 좌우 정렬 이렇게밖에 안되나? */
+}
 .user_login {
-    display: flex;
+	font-size:13px;
+    display:inline-block;
 	flex-direction:row;
-	justify-content:center;
+	justify-content:space-between;
 	text-decoration: none;
-	color:grey;
-	margin-left:5px;
-	margin-right:5px;
-	border-right:1px solid grey;
+	padding-right:5px;
+	color:gray;
+	border-right:1px solid lightgray;
+	/* 왜 flex로 하면 가로로 정렬이 안될까요? */
+}
+.user_login:last-child {
+	border-right:0px;
 }
 /* 
 #manage {
@@ -225,23 +282,43 @@ main {
 	height:100px;
 	width: 360px;
 } */
-
-.quicknotice {
+#manage {
+	box-sizing: border-box;
 	display: block;
-	margin-right: 150px;
+	background-color:white;
+	padding-right:25px;
+}
+.managelist {
+	display:flex;
+	flex-direction:row;
+	flex-wrap:wrap;
+	list-style: none;
+	margin:0;
+	padding:0;
 }
 
-.managelist > li {
-	display: inline-block;
-	margin-top: 3px;
-	padding: 3px;
+.managelist li {
+	width:50%;
+	text-align: center;
+}
+
+.managelist li a {
+	display:block;
+	text-align: center;
 }
 
 .manage {
+	display:flex;
+	flex-direction:row;
+	margin:0;
+	padding:0;
 	text-decoration: none;
 	color:black;
+	/*flex가 왜 안될까요? ㅠㅠ.*/
 }
-/* 
+
+ 
+ 
 #coupon {
 	float:right;
 	box-sizing: border-box;
@@ -250,9 +327,9 @@ main {
 	height:100px;
 	width: 360px;
 
-} */
+}
 
-/* #first {
+#first {
 	float:right;
 	box-sizing: border-box;
 	display: block;
@@ -260,7 +337,7 @@ main {
 	height:200px;
 	width: 360px;
 
-} */
+}
 
 .firstnotice {
 	display: block;
@@ -299,6 +376,16 @@ main {
   animation:0.5s goingDown ease;
 }
 
+#btn-menu {
+	display:none;
+}
+
+#notice {
+	padding:15px;
+	margin-top:0;
+	height:30;
+}
+
 @keyframes goingDown {
 	from {
 		margin-top:-100px;
@@ -306,4 +393,108 @@ main {
 	to {
 		margin-top:0;
 	}
+}
+
+@media(max-width:768px) {
+	body {
+		display:block;
+	}
+	main {
+		font-size:14px;
+		width:100%;
+		display:block;
+	}
+
+	.row {
+		margin:0 auto;
+		width:100%;
+		display:block;
+		justify-content:space-between;
+	}
+
+	#notice {
+		padding:15px;
+		margin-top:0;
+		height:30;
+	}
+
+	.row > div:first-child  {
+		margin-top:50px;
+		border-right:0px;
+	}
+
+	/* .row > div:first-child {
+		margin-top:100px;
+	} */
+	/* .row > div:first-child  {
+		display:block;
+		width:100%;
+		border-right:1px solid #d0d0d0;
+		border-bottom:1px solid #d0d0d0;
+	}
+	.row > div:last-child {
+		display:block;
+		width:100%;
+		border-bottom:1px solid #d0d0d0;
+	} */
+	.bodybanner > li {
+		display:block;
+		justify-content:space-between;
+		padding: 15px;
+	}
+	#header-top {
+		display:none;
+	}
+	#first {
+		box-sizing: border-box;
+		display: block;
+		background-color:white;
+		width:100%;
+	}
+	#login {
+		width:100%;
+	}
+	header {
+		min-height: 10px;
+		position: fixed;
+		width:100%;
+		top:0;left:0;right:0;
+		display:block;
+		width:100%;
+		background-color: tan;
+	}
+	
+	#btn-menu {
+		min-height:20px;
+		display:block;
+		margin:10px 10px;
+	}
+
+	#header-menubar {
+		display:block;
+		background-color: antiquewhite;
+		height:0px;
+		width:100%;
+		padding-right:0;
+		overflow:hidden;
+		transition:0.5s ease height;
+	  }
+
+	#header-menubar ul {
+		flex-direction: column;
+	}
+	#banner {
+		display:none;
+	}
+	.menutitle {
+		display:none;
+	}
+
+	.menu2:hover {
+		color:yellowgreen;
+		transition:0.2s ease color;
+	}
+
+	
+	
 }

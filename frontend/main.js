@@ -10,10 +10,10 @@
 //   return a + b;
 // }
 
-var printAlt = function(evt) {
-  // alt 출력
-  alert(evt.target.alt)
-};
+// var printAlt = function(evt) {
+//   // alt 출력
+//   alert(evt.target.alt)
+// };
 
 // 이미지 이벤트 리스너
 var elements = document.getElementsByTagName('img');
