@@ -54,5 +54,19 @@
     }
     document.getElementById('root').innerHTML = elemText;
   })
+
+  fetch('/post/like')
+  .then(function(res) {
+    return res.json();
+  })
+  .then(function(datas) {
+    datas = JSON.parse(datas);
+    console.log(datas);
+    var elemText = '';
+    for(var i = 0 ; i < datas.length ; i ++) {
+      var data = datas[i];
+      elemText = datas.}
+    document.getElementById('root').innerHTML = elemText;
+  })
 </script>
 {% endblock %}
