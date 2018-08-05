@@ -2,29 +2,31 @@
 <head>
     <meta charset="utf-8">
     <title>Portfolio</title>
+    {% load static %}
+    <link href="{% static "css/bundle.css" %}" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet" />
+    {% block head %}
+    {% endblock %}
 </head>
 <body>
-    <h1>Portfolio</h1>
+    <header>
+        <h1>Portfolio</h1>
 
-    {% if user.is_authenticated %}
-        {{user}}
-        <a href="{% url "logout" %}?next={{ request.path }}">로그아웃</a>
-    {% else %}
-        <a href="{% url "signup" %}">회원가입</a>
-        <a href="{% url "login" %}">로그인</a>
-    {% endif %}
-    
+        <div>
+            {% if user.is_authenticated %}
+                {{user}}
+                <a href="{% url "logout" %}?next={{ request.path }}">로그아웃</a>
+            {% else %}
+                <a href="{% url "signup" %}">회원가입</a>
+                <a href="{% url "login" %}">로그인</a>
+            {% endif %}
+        </div>
+    </header>
     {% block content %}
     {% endblock %}
 
 </body>
-<script>
-    fetch("https://jsonplaceholder.typicode.com/posts")
-    .then(function(res){
-        return res.json();
-    })
-    .then(function(data){
-        console.log(data)
-    })
-</script>
+{% block script %}
+{% endblock %}
 </html>

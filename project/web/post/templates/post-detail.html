@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="post">
+  <h2>{{ post.title }}</h2>
+  <button id="btn-like">
+    <i class="material-icons" id="icon-like">
+      favorite_border
+    </i>
+    <span id="like"></span>
+  </button>
+  <p>{{ post.body}} </p>
+</div>
+<script>
+  fetch('/post/like/{{post.pk}}')
+  .then(function(res) {
+    return res.json();
+  })
+  .then(function(datas) {
+    datas = JSON.parse(datas);
+    datas.forEach(data => {
+      if(String(data.user) === "{{user.pk}}") {
+        document.getElementById('icon-like').innerHTML = 'favorite';
+        document.getElementById('btn-like').addEventListener('click', function() {
+          // 좋아요 취소
+          fetch('/post/like/{{post.pk}}', {
+            method: 'DELETE',
+            headers: {
+              'Accept': 'application/json',
+            },
+            body: {
+              'csrftoken':"{% csrf_token %}"
+            }
+          }).then(res => {
+            return res.json();
+          }).then(res => {
+            console.log(res);
+          })
+        })
+      } else {
+        document.getElementById('btn-like').addEventListener('click', function() {
+          // 좋아요
+          fetch('/post/like/{{post.pk}}', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+            }
+          }).then(res => {
+            return res.json();
+          }).then(res => {
+            console.log(res);
+          })
+        })
+      }
+    })
+    document.getElementById('like').innerHTML = datas.length+'명';
+  })
+</script>
+{% endblock %}

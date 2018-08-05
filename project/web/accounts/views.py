@@ -1,8 +1,22 @@
 from django.conf import settings
+from django.http import JsonResponse
 from django.shortcuts import render
+from django.forms.models import model_to_dict
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect
 from django.views import View
+from post import models
+
+import json
+
+class LikeView(View):
+    def get(self, request):
+        LikeJSON = []
+        likeList = models.PostLike.objects.filter(user = request.user)
+        for like in likeList:
+            LikeJSON.append(model_to_dict(like))
+            likeList = json.dumps(LikeJSON)
+            return JsonResponse(likeList, safe=False)
 
 class signupnew(View):
     def get(self, request):
