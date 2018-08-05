@@ -30,5 +30,5 @@ class PostLike(View):
     for like in likeList:
       LikeJSON.append(model_to_dict(like))
       likeList = json.dumps(LikeJSON)
-      return JsonResponse(likeList, safe=False)
+    return JsonResponse(likeList, safe=False)
   # 돌면서 post_id에 얼마나 많은 user_id의 수가 매칭되었는지 저장을 해야되는데.. 그래서..

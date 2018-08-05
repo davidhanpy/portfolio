@@ -65,7 +65,8 @@
     var elemText = '';
     for(var i = 0 ; i < datas.length ; i ++) {
       var data = datas[i];
-      elemText = datas.}
+      elemText = elemText + '<h1>' + data.title + '</h1><p>' + data.body + '</p>'; 
+    }
     document.getElementById('root').innerHTML = elemText;
   })
 </script>
