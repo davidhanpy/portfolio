@@ -1,0 +1,44 @@
+body {
+    width:1440px;
+    overflow:hidden;
+    margin:0 auto;
+}
+
+header {
+    width:1440px;
+    overflow:hidden;
+    margin:0 auto;
+    padding:0;
+    display:block;
+}
+#menu {
+    /* width:1440px; */
+    box-sizing: border-box;
+    background-color: white;
+    height:60px;
+    align-items: center;
+    padding-top: 0;
+    padding-bottom: 0;
+    
+}
+
+#menu ul {
+    list-style:none;
+    display:flex;
+    flex-direction:row;
+    justify-content:flex-end;
+    font-size:16px;
+}
+
+#menu ul li a {
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    padding-right:10px;
+    text-decoration:none;
+    color:gray;
+}
+
+banner {
+
+}

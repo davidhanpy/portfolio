@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-<div id="root"></div>
+{% load static %}
+<link href="{% static "css/post-list.css" %}" rel="stylesheet" />
+<div id="root">
+</div>
 <script>
   // 프로미스 만드는 법
   // https://kangax.github.io/compat-table/es6/
@@ -35,7 +38,6 @@
       // console.log(err)
     }
   )
-
   fetch('/post/list')
   .then(function(res) {
     // fetch의 첫번째 resolve는 네트워킹 결과를 반환한다.
@@ -50,7 +52,7 @@
     // document.body.appendChild(elem);
     for(var i = 0 ; i < datas.length ; i ++) {
       var data = datas[i];
-      elemText = elemText + '<h1>' + data.title + '</h1><p>' + data.body + '</p>'; 
+      elemText = elemText + '<div class="root-frame">'+'<h1>'+data.title + '</h1><p>' + data.body + '</p>'+'</div>'; 
     }
     document.getElementById('root').innerHTML = elemText;
   })

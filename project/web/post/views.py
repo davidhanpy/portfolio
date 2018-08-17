@@ -25,8 +25,8 @@ class Post(View):
     postList = json.dumps(postJSON)
     return JsonResponse(postList, safe = False)
 
-def PostDetail(request, postId):
-  post = models.Post.objects.get(pk = postId)
+def PostDetail(request, Id):
+  post = models.Post.objects.get(pk = Id)
   return render(request, 'post-detail.html', {'post':post})
 
 @method_decorator(csrf_exempt, name="post")
