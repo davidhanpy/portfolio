@@ -19,6 +19,7 @@ class Post(View):
     postJSON = []
     postList = models.Post.objects.all()
 
+
     # postList = serializers.serialize('json', postList)
     for post in postList:
       postJSON.append(model_to_dict(post))

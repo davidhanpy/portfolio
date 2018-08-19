@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 class Post(models.Model):
   title = models.CharField(max_length = 256)
   body = models.TextField()
+  image = models.FileField(upload_to='media',default='')
 
   def __str__(self):
     return self.title
