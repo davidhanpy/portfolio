@@ -8,8 +8,70 @@
     </i>
     <span id="like"></span>
   </button>
+  <button id="btn-score">
+    평가하기
+  </button>
   <p>{{ post.body}} </p>
 </div>
+<div class="modal" id="modal-score">
+  <div class="modal-container">
+    <div>
+      별점 평가를 해주세요.
+    </div>
+    <div class="star-container">
+        <i class="material-icons">
+          star_border
+        </i>
+        <i class="material-icons">
+          star_border
+        </i>
+        <i class="material-icons">
+          star_border
+        </i>
+        <i class="material-icons">
+          star_border
+        </i>
+        <i class="material-icons">
+          star_border
+        </i>
+    </div>
+    <button class="btn-save">저장</button>
+    <button class="btn-close">닫기</button>
+  </div>
+</div>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script>
+  var idx = 0;
+  $('#btn-score').on('click', function() {
+    $('#modal-score').removeClass('hide');
+  });
+  $('.modal .btn-close').on('click', function() {
+    $(this).closest('.modal').addClass('hide');
+  });
+  $('.star-container .material-icons').on('mouseover', function() {
+    idx = $(this).index('.star-container .material-icons');
+    for(var i = 0 ; i <= idx ; i++ ) {
+      $('.star-container .material-icons:nth-child('+ (i + 1) +')').html('star');
+    }
+    for(var i = idx + 1 ; i < 5 ; i++) {
+      $('.star-container .material-icons:nth-child('+ (i + 1) +')').html('star_border');
+    }
+  })
+  $('.btn-save').on('click', function() {
+    $.ajax({
+      url:'/post/score/{{post.pk}}/'+idx,
+      method:'post'
+    }).done(function(result) {
+      console.log(result)
+    })
+  })
+  // $('.star-container .material-icons').on('mouseout', function() {
+  //   $(this).html('star_border');
+  // })
+</script>
 <script>
   fetch('/post/like/{{post.pk}}')
   .then(function(res) {
@@ -28,7 +90,7 @@
               'Accept': 'application/json',
             },
             body: {
-              'csrftoken':"{% csrf_token %}"
+              'csrftoken':"{{ csrf_token }}"
             }
           }).then(res => {
             return res.json();

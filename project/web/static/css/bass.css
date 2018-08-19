@@ -1,14 +1,16 @@
 @import url('http://fonts.googleapis.com/earlyaccess/nanumgothic.css'); 
 body, table, div, p {font-family:'Nanum Gothic';}
-
+* {
+    box-sizing: border-box;
+}
 body {
-    width:1440px;
-    overflow:hidden;
+    /* width:1440px; */
+    /* overflow:hidden; */
     margin:0 auto;
 }
 
 header {
-    width:1440px;
+    /* width:1440px; */
     overflow:hidden;
     margin:0 auto;
     padding:0;
@@ -63,4 +65,29 @@ img {
     display:block;
     margin-right:auto;
     margin-left:auto;
+}
+
+
+
+.modal {
+    position:fixed;
+    top:0; left:0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, .6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal.hide {
+    display: none;
+}
+.modal-container {
+    background-color:#fff;
+    width:500px;
+    height:300px;
+    padding:30px;
+}
+
+
+.star-container .material-icons {
+    font-size:36px;
 }

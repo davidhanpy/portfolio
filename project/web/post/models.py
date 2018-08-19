@@ -9,10 +9,43 @@ class Post(models.Model):
 
   def __str__(self):
     return self.title
+  
+  def __repr__(self):
+        return str(self.to_dict())
+
+  def to_dict(self):
+      opts = self._meta
+      data = {}
+      for f in opts.concrete_fields + opts.many_to_many:
+          if isinstance(f, models.ManyToManyField):
+              if self.pk is None:
+                  data[f.name] = []
+              else:
+                  data[f.name] = list(f.value_from_object(self).values_list('pk', flat=True))
+          elif isinstance(f, models.DateTimeField):
+              if f.value_from_object(self) is not None:
+                  data[f.name] = f.value_from_object(self).timestamp()
+              else:
+                  data[f.name] = None
+          elif isinstance(f, models.FileField):
+              # print(f.storage.open(f.name))
+              pass #data[f.name] = ''#f.url
+          else:
+              data[f.name] = f.value_from_object(self)
+      return data
+
 
 class PostLike(models.Model):
   post = models.ForeignKey(Post, on_delete = 'CASCADE')
   user = models.ForeignKey(User, on_delete = 'CASCADE')
+
+  def __str__(self):
+    return str(self.post.pk) + ' :: ' + self.user.username 
+
+class PostScore(models.Model):
+  post = models.ForeignKey(Post, on_delete = 'CASCADE')
+  user = models.ForeignKey(User, on_delete = 'CASCADE')
+  score = models.IntegerField()
 
   def __str__(self):
     return str(self.post.pk) + ' :: ' + self.user.username 

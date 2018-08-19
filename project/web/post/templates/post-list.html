@@ -3,58 +3,77 @@
 {% load static %}
 <link href="{% static "css/post-list.css" %}" rel="stylesheet" />
 <div id="root">
+  <!-- {% for post in postList %}
+  <div class="root-frame">
+    <h1>{{post.title}}</h1>
+    <p>{{post.body}}</p>
+  </div>
+  {% endfor %} -->
 </div>
+<div id="paginator"></div>
+
+<!-- <div class="pagination">
+    <span class="step-links">
+        {% if postList.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ postList.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ postList.number }} of {{ postList.paginator.num_pages }}.
+        </span>
+
+        {% if postList.has_next %}
+            <a href="?page={{ postList.next_page_number }}">next</a>
+            <a href="?page={{ postList.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div> -->
 <script>
-  // 프로미스 만드는 법
-  // https://kangax.github.io/compat-table/es6/
-  var add = function(a, b) {
-    return new Promise((resolve, reject) => {
-      var result = a + b;
-      if(isNaN(result))
-        reject('NaN');
-      else
-        resolve(result);
+  var initialPageNum = 1;
+  try {
+    initialPageNum = document.location.href.split('?')[1].split('=')[1];
+  }
+  catch {
+    console.log('no page num')
+  }
+  function loadPage(pageNum) {
+    fetch('/post/list?page='+pageNum)
+    .then(function(res) {
+      // fetch의 첫번째 resolve는 네트워킹 결과를 반환한다.
+      return res.json();
+    })
+    .then(function(datas) {
+      datas = JSON.parse(datas);
+      console.log(datas);
+      var elemText = '';
+      // var elem = document.createElement('h1');
+      // elem.innerHTML = data.title;
+      // document.body.appendChild(elem);
+      for(var i = 0 ; i < datas.data.length ; i ++) {
+        var data = datas.data[i];
+        elemText = elemText + '<div class="root-frame">'+'<h1>'+data.title + '</h1><p>' + data.body + '</p>'+'</div>'; 
+      }
+      var startNum = datas.pageNumber - 3 < 1 ? 1 : datas.pageNumber;
+      var endNum = datas.pageNumber + 3 > datas.totalPage ? datas.totalPage : datas.pageNumber + 3;
+      var pageText = '';
+      for(var i = startNum ; i <= endNum ; i++) {
+        console.log(i, startNum, endNum);
+        pageText = pageText + '<a class="'+ (datas.pageNumber === i ? 'current' : '')  +'" href="' + i + '">' + i + '</a>';
+      }
+      document.getElementById('root').innerHTML = elemText;
+      document.getElementById('paginator').innerHTML = pageText;
+
+      var pages = document.getElementById('paginator').children;
+      for(var i = 0 ; i < pages.length ; i++) {
+        pages[i].addEventListener('click', function() {
+          event.preventDefault();
+          loadPage(event.target.innerHTML)
+        })
+      }
     })
   }
-  var add_no_promise = function(a, b) {
-    var result = a + b;
-    if(isNaN(result))
-      return ('NaN');
-    else
-      return (result);
-  }
-  var add2 = function(a, b) {
-    if(isNaN(a + b))
-      Promise.reject('NaN');
-    else
-      Promise.resolve(a + b);
-  }
-
-  add(5, 7)
-  .then(function(number) {
-    // console.log(number);
-  })
-  .catch(function(err) {
-      // console.log(err)
-    }
-  )
-  fetch('/post/list')
-  .then(function(res) {
-    // fetch의 첫번째 resolve는 네트워킹 결과를 반환한다.
-    return res.json();
-  })
-  .then(function(datas) {
-    datas = JSON.parse(datas);
-    console.log(datas);
-    var elemText = '';
-    // var elem = document.createElement('h1');
-    // elem.innerHTML = data.title;
-    // document.body.appendChild(elem);
-    for(var i = 0 ; i < datas.length ; i ++) {
-      var data = datas[i];
-      elemText = elemText + '<div class="root-frame">'+'<h1>'+data.title + '</h1><p>' + data.body + '</p>'+'</div>'; 
-    }
-    document.getElementById('root').innerHTML = elemText;
-  })
+  
+  loadPage(initialPageNum);
 </script>
 {% endblock %}
