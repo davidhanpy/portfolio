@@ -3,8 +3,6 @@ from django.http import HttpResponse, JsonResponse
 from django.core import serializers
 from django.views import View
 from django.forms.models import model_to_dict
-from django.views.decorators.csrf import csrf_exempt
-from django.utils.decorators import method_decorator
 from django.core.paginator import Paginator
 from . import models
 
@@ -43,8 +41,6 @@ def PostDetail(request, Id):
   post = models.Post.objects.get(pk = Id)
   return render(request, 'post-detail.html', {'post':post})
 
-@method_decorator(csrf_exempt, name="post")
-@method_decorator(csrf_exempt, name="delete")
 class PostLike(View):
   def get(self, request, postId):
     LikeJSON = []
@@ -55,7 +51,8 @@ class PostLike(View):
     return JsonResponse(likeList, safe=False)
 
   def post(self, request, postId):
-    newlike = models.PostLike(post__pk = postId, user = request.user)
+    post = models.Post.objects.get(pk = postId)
+    newlike = models.PostLike(post = post, user = request.user)
     newlike.save()
     return JsonResponse({'error':0})
   
@@ -69,25 +66,24 @@ class PostLike(View):
       return JsonResponse({'error':1})
   # 돌면서 post_id에 얼마나 많은 user_id의 수가 매칭되었는지 저장을 해야되는데.. 그래서.. 
 
-@method_decorator(csrf_exempt, name="post")
-@method_decorator(csrf_exempt, name="delete")
 class PostScore(View):
   def get(self, request, postId):
     LikeJSON = []
-    likeList = models.PostSocre.objects.filter(post__pk = postId)
+    likeList = models.PostScore.objects.filter(post__pk = postId)
     for like in likeList:
       LikeJSON.append(model_to_dict(like))
-      likeList = json.dumps(LikeJSON)
+    likeList = json.dumps(LikeJSON)
     return JsonResponse(likeList, safe=False)
 
-  def post(self, request, postId, score):
-    newlike = models.PostSocre(post__pk = postId, user = request.user, score=int(score))
+  def post(self, request, postId):
+    score = request.POST.get('score', 1)
+    newlike = models.PostScore(post__pk = postId, user = request.user, score=int(score))
     newlike.save()
     return JsonResponse({'error':0})
   
   def delete(self, request, postId):
     try:
-      like = models.PostSocre.objects.get(post__pk = postId, user = request.user)
+      like = models.PostScore.objects.get(post__pk = postId, user = request.user)
       like.delete()
       return JsonResponse({'error':0})
     except Exception as e:
