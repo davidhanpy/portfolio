@@ -59,6 +59,11 @@ header p {
     margin-top:0px;
     margin-bottom:0px;
     align-items: center;
+    height:280px;
+
+    background-attachment: fixed;    
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 img {

@@ -1,8 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="post">
-  <h2>{{ post.title }}</h2>
-  <button id="btn-like">
+  <h2 id="title">
+    {% for char in post.title %}
+    <span>{{char}}</span>
+    {% endfor %}
+  </h2>
+  <img src="/{{ post.image }}" />
+  <!-- <button id="btn-like">
     <i class="material-icons" id="icon-like">
       favorite_border
     </i>
@@ -10,7 +15,7 @@
   </button>
   <button id="btn-score">
     평가하기
-  </button>
+  </button> -->
   <p>{{ post.body }} </p>
 </div>
 <div class="modal hide" id="modal-score">
@@ -44,36 +49,24 @@
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
 <script>
-  function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
+  // 애니메이션
+  // for(var i = 0 ; i < '{{post.title}}'.length ; i++) {
+  //   window.setTimeout(function() {
+  //      $('#title').children('span:nth-child('+i+')').css({color:'red'});
+  //   }, 200);
+  // }
+  var i = 0;
+  var timer = window.setInterval(function() {
+    $('#title').children('span:nth-child('+i+')').addClass('animate');
+    i++;
+    console.log(i);
+    if (i === '{{post.title}}'.length + 1) {
+      window.clearInterval(timer);
+      $('.post img').addClass('animate');
     }
-    return cookieValue;
-  }
-  var csrftoken = getCookie('csrftoken');
-  function csrfSafeMethod(method) {
-    // these HTTP methods do not require CSRF protection
-    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-  }
-  $.ajaxSetup({
-    beforeSend: function(xhr, settings) {
-      if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-        xhr.setRequestHeader("X-CSRFTOKEN", csrftoken);
-        xhr.setRequestHeader("csrftoken", csrftoken);
-        xhr.setRequestHeader('Accept', 'application/json');
-        xhr.setRequestHeader('Content-Type', 'application/json');
-      }
-    }
-  });
+  }, 200)
+</script>
+<script>
   var idx = 0;
   $('#btn-score').on('click', function() {
     $('#modal-score').removeClass('hide');
@@ -108,46 +101,46 @@
   // $('.star-container .material-icons').on('mouseout', function() {
   //   $(this).html('star_border');
   // })
-  fetch('/post/like/{{post.pk}}')
-  .then(function(res) {
-    return res.json();
-  })
-  .then(function(datas) {
-    datas = JSON.parse(datas);
-    datas.forEach(data => {
-      if(String(data.user) === "{{user.pk}}") {
-        document.getElementById('icon-like').innerHTML = 'favorite';
-        document.getElementById('btn-like').addEventListener('click', function() {
-          // 좋아요 취소
-          fetch('/post/like/{{post.pk}}', {
-            method: 'DELETE',
-            contentType:'application/json',
-            dataType: 'application/json',
-          }).then(res => {
-            return res.json();
-          }).then(res => {
-            console.log(res);
-          })
-          .catch(err => {
+  // fetch('/post/like/{{post.pk}}')
+  // .then(function(res) {
+  //   return res.json();
+  // })
+  // .then(function(datas) {
+  //   datas = JSON.parse(datas);
+  //   datas.forEach(data => {
+  //     if(String(data.user) === "{{user.pk}}") {
+  //       document.getElementById('icon-like').innerHTML = 'favorite';
+  //       document.getElementById('btn-like').addEventListener('click', function() {
+  //         // 좋아요 취소
+  //         fetch('/post/like/{{post.pk}}', {
+  //           method: 'DELETE',
+  //           contentType:'application/json',
+  //           dataType: 'application/json',
+  //         }).then(res => {
+  //           return res.json();
+  //         }).then(res => {
+  //           console.log(res);
+  //         })
+  //         .catch(err => {
 
-          });
-        })
-      } else {
-        document.getElementById('btn-like').addEventListener('click', function() {
-          // 좋아요
-          fetch('/post/like/{{post.pk}}', {
-            method: 'POST',
-            contentType:'application/json',
-            dataType: 'application/json',
-          }).then(res => {
-            return res.json();
-          }).then(res => {
-            console.log(res);
-          })
-        })
-      }
-    })
-    document.getElementById('like').innerHTML = datas.length+'명';
-  })
+  //         });
+  //       })
+  //     } else {
+  //       document.getElementById('btn-like').addEventListener('click', function() {
+  //         // 좋아요
+  //         fetch('/post/like/{{post.pk}}', {
+  //           method: 'POST',
+  //           contentType:'application/json',
+  //           dataType: 'application/json',
+  //         }).then(res => {
+  //           return res.json();
+  //         }).then(res => {
+  //           console.log(res);
+  //         })
+  //       })
+  //     }
+  //   })
+  //   document.getElementById('like').innerHTML = datas.length+'명';
+  // })
 </script>
 {% endblock %}
