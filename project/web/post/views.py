@@ -25,7 +25,7 @@ class Post(View):
     postJSON = []
     postList = models.Post.objects.all()
     paginator = Paginator(postList, 3)
-
+    #리스트와 해당 리스트를 한 페이지에 몇개 보여줄 것인가
     page = int(request.GET.get('page', 1))
     postList = paginator.get_page(page)
     # postList = serializers.serialize('json', postList)
@@ -67,7 +67,7 @@ class PostLike(View):
     except Exception as e:
       print(e)
       return JsonResponse({'error':1})
-  # 돌면서 post_id에 얼마나 많은 user_id의 수가 매칭되었는지 저장을 해야되는데.. 그래서.. 
+ ##돌면서 post_id에 얼마나 많은 user_id의 수가 매칭되었는지 저장을 해야되는데.. 그래서.
 
 @method_decorator(csrf_exempt, name="post")
 @method_decorator(csrf_exempt, name="delete")
@@ -81,13 +81,13 @@ class PostScore(View):
     return JsonResponse(likeList, safe=False)
 
   def post(self, request, postId, score):
-    newlike = models.PostSocre(post__pk = postId, user = request.user, score=int(score))
+    newlike = models.PostScore(post__pk = postId, user = request.user, score=int(score))
     newlike.save()
     return JsonResponse({'error':0})
   
   def delete(self, request, postId):
     try:
-      like = models.PostSocre.objects.get(post__pk = postId, user = request.user)
+      like = models.PostScore.objects.get(post__pk = postId, user = request.user)
       like.delete()
       return JsonResponse({'error':0})
     except Exception as e:

@@ -12,8 +12,7 @@
     평가하기
   </button>
   <p>{{ post.body}} </p>
-</div>
-<div class="modal" id="modal-score">
+<div class="modal hide" id="modal-score">
   <div class="modal-container">
     <div>
       별점 평가를 해주세요.
@@ -53,6 +52,7 @@
   });
   $('.star-container .material-icons').on('mouseover', function() {
     idx = $(this).index('.star-container .material-icons');
+    //부모 기준으로 몇번째인지 찾는다
     for(var i = 0 ; i <= idx ; i++ ) {
       $('.star-container .material-icons:nth-child('+ (i + 1) +')').html('star');
     }
