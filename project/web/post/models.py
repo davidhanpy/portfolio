@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class Post(models.Model):
   title = models.CharField(max_length = 256)
   body = models.TextField()
-  image = models.FileField(upload_to='media',default='')
+  image = models.FileField(upload_to='',default='')
 
   def __str__(self):
     return self.title
@@ -28,8 +28,9 @@ class Post(models.Model):
               else:
                   data[f.name] = None
           elif isinstance(f, models.FileField):
-              # print(f.storage.open(f.name))
-              pass #data[f.name] = ''#f.url
+              if f.value_from_object(self):
+                  data[f.name] = f.value_from_object(self).url
+              pass
           else:
               data[f.name] = f.value_from_object(self)
       return data

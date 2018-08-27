@@ -1,8 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="post">
-  <h2>{{ post.title }}</h2>
-  <button id="btn-like">
+  <h2 id="title">
+    {% for char in post.title %}
+    <span>{{char}}</span>
+    {% endfor %}
+  </h2>
+  <img src="/{{ post.image }}" />
+  <!-- <button id="btn-like">
     <i class="material-icons" id="icon-like">
       favorite_border
     </i>
@@ -10,8 +15,14 @@
   </button>
   <button id="btn-score">
     평가하기
+<<<<<<< HEAD
   </button>
   <p>{{ post.body}} </p>
+=======
+  </button> -->
+  <p>{{ post.body }} </p>
+</div>
+>>>>>>> 8659dcc1ba111575c0a29c41d4e969f31c58ebff
 <div class="modal hide" id="modal-score">
   <div class="modal-container">
     <div>
@@ -43,6 +54,24 @@
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
 <script>
+  // 애니메이션
+  // for(var i = 0 ; i < '{{post.title}}'.length ; i++) {
+  //   window.setTimeout(function() {
+  //      $('#title').children('span:nth-child('+i+')').css({color:'red'});
+  //   }, 200);
+  // }
+  var i = 0;
+  var timer = window.setInterval(function() {
+    $('#title').children('span:nth-child('+i+')').addClass('animate');
+    i++;
+    console.log(i);
+    if (i === '{{post.title}}'.length + 1) {
+      window.clearInterval(timer);
+      $('.post img').addClass('animate');
+    }
+  }, 200)
+</script>
+<script>
   var idx = 0;
   $('#btn-score').on('click', function() {
     $('#modal-score').removeClass('hide');
@@ -62,59 +91,62 @@
   })
   $('.btn-save').on('click', function() {
     $.ajax({
-      url:'/post/score/{{post.pk}}/'+idx,
-      method:'post'
-    }).done(function(result) {
+      url:'/post/score/{{post.pk}}',
+      method:'post',
+      dataType: 'application/json',
+      contentType:'application/json',
+      data:{
+        'score': idx,
+      }
+    }).success(function(result) {
       console.log(result)
+    }).error(function(error) {
+
     })
   })
   // $('.star-container .material-icons').on('mouseout', function() {
   //   $(this).html('star_border');
   // })
-</script>
-<script>
-  fetch('/post/like/{{post.pk}}')
-  .then(function(res) {
-    return res.json();
-  })
-  .then(function(datas) {
-    datas = JSON.parse(datas);
-    datas.forEach(data => {
-      if(String(data.user) === "{{user.pk}}") {
-        document.getElementById('icon-like').innerHTML = 'favorite';
-        document.getElementById('btn-like').addEventListener('click', function() {
-          // 좋아요 취소
-          fetch('/post/like/{{post.pk}}', {
-            method: 'DELETE',
-            headers: {
-              'Accept': 'application/json',
-            },
-            body: {
-              'csrftoken':"{{ csrf_token }}"
-            }
-          }).then(res => {
-            return res.json();
-          }).then(res => {
-            console.log(res);
-          })
-        })
-      } else {
-        document.getElementById('btn-like').addEventListener('click', function() {
-          // 좋아요
-          fetch('/post/like/{{post.pk}}', {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-            }
-          }).then(res => {
-            return res.json();
-          }).then(res => {
-            console.log(res);
-          })
-        })
-      }
-    })
-    document.getElementById('like').innerHTML = datas.length+'명';
-  })
+  // fetch('/post/like/{{post.pk}}')
+  // .then(function(res) {
+  //   return res.json();
+  // })
+  // .then(function(datas) {
+  //   datas = JSON.parse(datas);
+  //   datas.forEach(data => {
+  //     if(String(data.user) === "{{user.pk}}") {
+  //       document.getElementById('icon-like').innerHTML = 'favorite';
+  //       document.getElementById('btn-like').addEventListener('click', function() {
+  //         // 좋아요 취소
+  //         fetch('/post/like/{{post.pk}}', {
+  //           method: 'DELETE',
+  //           contentType:'application/json',
+  //           dataType: 'application/json',
+  //         }).then(res => {
+  //           return res.json();
+  //         }).then(res => {
+  //           console.log(res);
+  //         })
+  //         .catch(err => {
+
+  //         });
+  //       })
+  //     } else {
+  //       document.getElementById('btn-like').addEventListener('click', function() {
+  //         // 좋아요
+  //         fetch('/post/like/{{post.pk}}', {
+  //           method: 'POST',
+  //           contentType:'application/json',
+  //           dataType: 'application/json',
+  //         }).then(res => {
+  //           return res.json();
+  //         }).then(res => {
+  //           console.log(res);
+  //         })
+  //       })
+  //     }
+  //   })
+  //   document.getElementById('like').innerHTML = datas.length+'명';
+  // })
 </script>
 {% endblock %}

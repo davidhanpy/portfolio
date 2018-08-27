@@ -31,12 +31,12 @@
 </div> -->
 <script>
   var initialPageNum = 1;
-  try {
-    initialPageNum = document.location.href.split('?')[1].split('=')[1];
-  }
-  catch {
-    console.log('no page num')
-  }
+  // try {
+  //   initialPageNum = document.location.href.split('?')[1].split('=')[1];
+  // }
+  // catch() {
+  //   console.log('no page num')
+  // }
   function loadPage(pageNum) {
     fetch('/post/list?page='+pageNum)
     .then(function(res) {

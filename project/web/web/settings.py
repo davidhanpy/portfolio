@@ -126,9 +126,14 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = (
     ("js", os.path.join(STATIC_ROOT, 'js')),
     ("css", os.path.join(STATIC_ROOT, 'css')),
+    ("scss", os.path.join(STATIC_ROOT, 'scss')),
     ("images", os.path.join(STATIC_ROOT, 'images')),
     ("fonts", os.path.join(STATIC_ROOT, 'fonts'))
 )
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 from django.urls import reverse_lazy
 
